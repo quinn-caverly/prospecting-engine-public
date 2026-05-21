@@ -2,6 +2,8 @@
 
 Multi-agent research pipeline for the [KnavishMantis](https://youtube.com/@knavishmantis) YouTube channel. Vertex AI ADK + Gemini on Cloud Run.
 
+> Source is private (channel IP). This README is the public-facing architecture writeup.
+
 Collects ideas from 12 sources — reddit, youtube comments, the Minecraft bug tracker, decompiled MC source code, and others — and runs strict editorial prompts that filter out 90%+ of ideas that don't fit the channel's style. Has produced highly unique shorts that wouldn't be found otherwise: *"Endermen secretly use a diamond axe"* came out of the code sub-agent reading decompiled Minecraft and surfacing a quirk in the source; the final video got 200K+ views.
 
 ```mermaid
@@ -31,23 +33,3 @@ A single `SequentialAgent` of four stages:
 `FinalizeAgent` writes briefs to Postgres + GCS; Discord webhook on completion.
 
 **Stack:** Python · Vertex AI ADK · Gemini 2.5 Flash + Pro · FastAPI · Cloud Run · Cloud SQL · GCS · Secret Manager · Terraform · GitHub Actions.
-
-## HTTP API
-
-- `POST /run-prospecting` — backlog-driven trigger (consumer calls this when brief inventory is low; no scheduler in the engine)
-- `POST /seed-idea` — manually-seeded idea
-- `GET /status` — run telemetry
-- `GET /health`
-
-## Notes
-
-- Flash for the 12 fan-out analyzers, Pro for the gate and research — per-call cost dominates at fan-out, reasoning quality matters downstream.
-- Monthly LLM budget is a circuit-breaker, not a hint — every LLM call passes through `budget.check_budget()`; pipeline halts at 90% of the monthly cap.
-- Backlog-driven, not cron — consumer calls `/run-prospecting`; engine has no scheduler.
-- Plug-and-play consumer contract — engine writes only to its own table and GCS prefix; never reads anything the consumer adds.
-- Dedup at insertion via embeddings — cheap rejection beats expensive rejection.
-- All infra in Terraform; CI/CD via GitHub Actions on push to main.
-
-## Source
-
-Private (channel IP). This README documents the architecture.
