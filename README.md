@@ -4,7 +4,7 @@ Multi-agent research pipeline for the [KnavishMantis](https://youtube.com/@knavi
 
 > Source is private. This README is the public-facing architecture writeup.
 
-Collects ideas from 12 sources — reddit, youtube comments, the Minecraft bug tracker, decompiled MC source code, and others — and runs strict editorial prompts that filter out 90%+ of ideas that don't fit the channel's style. Has produced highly unique shorts that wouldn't be found otherwise: *"Endermen secretly use a diamond axe"* came out of the code sub-agent reading decompiled Minecraft and surfacing a quirk in the source; the final video got 200K+ views.
+Collects ideas from 12 sources — reddit, youtube comments, the Minecraft bug tracker, decompiled MC source code, and others — and runs strict editorial prompts that filter out 90%+ of ideas that don't fit the channel's style. Has produced highly unique shorts that wouldn't be found otherwise: [*"Endermen secretly use a diamond axe"*](https://youtube.com/shorts/uBycRI6byHc) came out of the code sub-agent reading decompiled Minecraft and surfacing a quirk in the source; the final video got 200K+ views.
 
 ![Sample brief rendered in the consumer site](idea-brief.png)
 
